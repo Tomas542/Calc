@@ -68,6 +68,9 @@ class Calculator(QWidget):
         self.b_dicrese = QPushButton("/", self)
         self.hbox_forth.addWidget(self.b_dicrese)
 
+        self.b_del = QPushButton("Del", self)
+        self.hbox_forth.addWidget(self.b_del)
+
         self.b_result = QPushButton("=", self)
         self.hbox_result.addWidget(self.b_result)
 
@@ -75,6 +78,7 @@ class Calculator(QWidget):
         self.b_minus.clicked.connect(lambda: self._operation("-"))
         self.b_increasing.clicked.connect(lambda: self._operation("*"))
         self.b_dicrese.clicked.connect(lambda: self._operation("/"))
+        self.b_del.clicked.connect(lambda: self._operation("Del"))
         self.b_result.clicked.connect(self._result)
 
         self.b_1.clicked.connect(lambda: self._button("1"))
@@ -88,6 +92,7 @@ class Calculator(QWidget):
         self.b_9.clicked.connect(lambda: self._button("9"))
         self.b_0.clicked.connect(lambda: self._button("0"))
         self.b_point.clicked.connect(lambda: self._button("."))
+
 
     def _button(self, param):
         line = self.input.text()
@@ -111,6 +116,8 @@ class Calculator(QWidget):
                 self.input.setText(str(self.num_2))
             else:
                 self.input.setText(str(self.num_1 / self.num_2))
+        if self.op == "Del":
+            self.input.setText(str(""))
 
 app = QApplication(sys.argv)
 
